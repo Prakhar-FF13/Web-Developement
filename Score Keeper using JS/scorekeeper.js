@@ -42,10 +42,10 @@ reset.addEventListener("click",function(){
 num.addEventListener("change", function(){
 	winningscore = Number(num.value);
 	document.getElementById("playto").textContent = winningscore;
-	reset();
+	resetall();
 });
 
-function reset(){
+function resetall(){
 	p1score = p2score = 0;
 	gameover = false;
 	p1Display.classList.remove("winner");
