@@ -1,12 +1,52 @@
 var colors = generateRandomColors(6);
-
+var numberofsquares = 6;
 var squares = document.querySelectorAll(".square");
 var pickedColor = pickColor();
 var colorDisplay = document.getElementById("colorDisplay");
 var messageDisplay = document.getElementById("message");
 var h1 = document.querySelector("h1");
+var resetButton = document.querySelector("#reset");
+var easyBtn = document.getElementById("easyBtn");
+var hardBtn = document.getElementById("hardBtn");
 colorDisplay.textContent = pickedColor;
 
+easyBtn.addEventListener("click", function(){
+	easyBtn.classList.add("selected");
+	hardBtn.classList.remove("selected");
+	numberofsquares = 3;
+	colors = generateRandomColors(3);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	for(var i = 0 ; i < squares.length ; i++){
+		if(colors[i])
+			squares[i].style.backgroundColor = colors[i];
+		else
+			squares[i].style.display = "none";
+	}
+});
+
+hardBtn.addEventListener("click", function(){
+	hardBtn.classList.add("selected");
+	easyBtn.classList.remove("selected");
+	colors = generateRandomColors(6);
+	numberofsquares = 6;
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	for(var i = 0 ; i < squares.length ; i++){
+		squares[i].style.backgroundColor = colors[i];
+		squares[i].style.display = "block";
+	}
+});
+
+resetButton.addEventListener("click", function(){
+	colors = generateRandomColors(numberofsquares);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	for(var i = 0 ; i < squares.length ; i++){
+		squares[i].style.backgroundColor = colors[i];
+	}
+	h1.style.backgroundColor = "#232323";	
+});
 for(var i = 0 ; i < squares.length ; i++){
 	// Add initial Colors
 	squares[i].style.backgroundColor = colors[i];
@@ -19,6 +59,7 @@ for(var i = 0 ; i < squares.length ; i++){
 			messageDisplay.textContent = "Correct";
 			changeColors(clickedColor);
 			h1.style.backgroundColor = clickedColor;
+			resetButton.style.textContent = "Play Again ?";
 		}
 		else{
 			this.style.backgroundColor = "#232323";
